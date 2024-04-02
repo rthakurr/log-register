@@ -3,6 +3,6 @@
   
 @section('contents')
   <div class="row">
-    Dashboard
+ Welcome 
   </div>
 @endsection
