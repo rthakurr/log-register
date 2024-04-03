@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\DashboardController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -16,7 +18,7 @@ use App\Http\Controllers\ProductController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('login');
 });
 Route::controller(AuthController::class)->group(function () {
     Route::get('register', 'register')->name('register');
@@ -41,5 +43,8 @@ Route::middleware('auth')->group(function () {
         Route::delete('destroy/{id}', 'destroy')->name('products.destroy');
     });
     Route::get('/profile', [\App\Http\Controllers\AuthController::class, 'profile'])->name('profile');
-    
+    Route::middleware(['auth'])->group(function () {
+        Route::get('dashboard', [DashboardController::class, 'showDashboard'])->name('dashboard');
+        // Your other routes...
+    });
 });
