@@ -76,4 +76,10 @@ class ProductController extends Controller
   
         return redirect()->route('products')->with('success', 'product deleted successfully');
     }
+    public function showDashboard()
+{
+    $productCount = Product::count();
+    
+    return view('dashboard', compact('profileCount', 'productCount'));
+}
 }
